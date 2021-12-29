@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60" status="WARN">
+  <DynamicThresholdFilter key="X-LOG-LEVEL" defaultThreshold="INFO" onMatch="ACCEPT" onMismatch="NEUTRAL">
+    <KeyValuePair key="debug" value="DEBUG"/>
+    <KeyValuePair key="trace" value="TRACE"/>
+  </DynamicThresholdFilter>
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %style{%-12X{tenant_alias}}{cyan} %highlight{%5p}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} %style{${sys:PID}}{magenta} TraceId:%-20X{traceId} --- [%15.15t] %style{%-40.40logger{39}}{cyan} : %m%n"/>
+    </Console>
+    <File name="File" fileName="output.log" append="false">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-12X{tenant_alias} %5p ${sys:PID} TraceId:%-20X{traceId} --- [%15.15t] %-40.40logger{39} : %m%n"/>
+    </File>
+  </Appenders>
+  <Loggers>
+    <Root level="INFO">
+      <AppenderRef ref="Console"/>
+    </Root>
+  </Loggers>
+</Configuration>
